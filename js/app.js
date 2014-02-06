@@ -1,32 +1,48 @@
 $(document).ready(function(){
-  var $tweetContainer = $('.tweet-content');
-
 	/* Parameters */
+  var $tweetContainer = $('.tweet-content');
   var index = -1;
 	var refreshRate = 1000;
+	var user = null;
 
-	/* Show tweets between start and end indices */
-	var showTweets = function(start,end){
-		var index = start;
-    while(index >= end){
+	/* Refresh tweets */
+	var refreshTweets = function(){
+		var index = streams.home.length - 1;
+		$tweetContainer.empty();
+    while(index >= 0){
       var tweet = streams.home[index];
-      var $tweet = $('<div class="tweet"><div class="username"></div><div class="timestamp"></div><div class="msg"></div></div>');
-			timestamp = moment().fromNow(tweet.created_at);
-      $tweet.text('@' + tweet.user + " (" + timestamp + '): ' + tweet.message);
-      $tweet.appendTo($tweetContainer);
+
+			if (user === null || user === tweet.user){
+	      var $tweet = $('<div class="tweet"></div>');
+				var $tweetUser = $('<div class="username"></div>');
+				var $tweetTime = $('<div class="timestamp"></div>');
+				var $tweetMsg = $('<div class="msg"></div>');
+				$tweetUser.text('@' + tweet.user);
+				$tweetTime.text( moment(tweet.created_at).fromNow() );
+				$tweetMsg.text(tweet.message);
+				$tweetUser.appendTo($tweet);
+				$tweetTime.appendTo($tweet);
+				$tweetMsg.appendTo($tweet);
+	      $tweet.appendTo($tweetContainer);
+			}
+			
       index -= 1;
     }
+		
+		/* username click filters tweets by user */
+		$('.username').click(function(){
+			user = $(this).text().slice(1);
+			$('.tweet-subheader').text('Tweets by @' + user);
+		});
 	}
 
-	/* Auto adds new tweets */
+	/* Auto refreshes tweets after every time interval */
 	var autorefreshTweets = function(){
-		var newIndex = streams.home.length - 1;
-		showTweets(newIndex,index+1);
-		index = newIndex;
+		refreshTweets();
 		setTimeout(function(){
 			autorefreshTweets();
 		},refreshRate);
 	}
-	
+		
 	autorefreshTweets();
 });
