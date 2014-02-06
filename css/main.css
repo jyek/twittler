@@ -62,6 +62,15 @@ body {
 	border-bottom: 1px solid #e1e8ed;	
 }
 
+.onclick-show-all {
+	cursor: pointer;
+}
+
+.onclick-tweet {
+	padding-left: 5px;
+	cursor: pointer;	
+}
+
 /* Tweet */
 
 .tweet-content {
