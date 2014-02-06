@@ -1,6 +1,5 @@
 $(document).ready(function(){
-  var $body = $('body');
-  $body.html('');
+  var $tweetContainer = $('.tweet-content');
 
 	/* Parameters */
   var index = -1;
@@ -11,9 +10,10 @@ $(document).ready(function(){
 		var index = start;
     while(index >= end){
       var tweet = streams.home[index];
-      var $tweet = $('<div></div>');
-      $tweet.text('@' + tweet.user + " (" + tweet.created_at + '): ' + tweet.message);
-      $tweet.appendTo($body);
+      var $tweet = $('<div class="tweet"><div class="username"></div><div class="timestamp"></div><div class="msg"></div></div>');
+			timestamp = moment().fromNow(tweet.created_at);
+      $tweet.text('@' + tweet.user + " (" + timestamp + '): ' + tweet.message);
+      $tweet.appendTo($tweetContainer);
       index -= 1;
     }
 	}
