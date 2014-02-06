@@ -1,10 +1,10 @@
 $(document).ready(function(){
+	
 	/* Parameters */
   var $tweetContainer = $('.tweet-content');
   var index = -1;
 	var refreshRate = 3000;
 	var user = null;
-	var visitor = null;
 
 	/* Show all tweets button */
 	var $showAllButton = $('<span class="onclick-show-all"><i class="fa fa-home"></i> Back to All Tweets</span>');
