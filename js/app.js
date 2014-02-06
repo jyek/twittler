@@ -4,9 +4,10 @@ $(document).ready(function(){
   var index = -1;
 	var refreshRate = 3000;
 	var user = null;
+	var visitor = null;
 
 	/* Show all tweets button */
-	var $showAllButton = $('<span class="onclick-show-all"><i class="fa fa-home"></i> All Tweets</span>');
+	var $showAllButton = $('<span class="onclick-show-all"><i class="fa fa-home"></i> Back to All Tweets</span>');
 	$showAllButton.click(function(){
 		user = null;
 		$('.tweet-subheader').empty();
@@ -47,7 +48,8 @@ $(document).ready(function(){
 		// when clicked, filters tweets by user
 		$('.username').click(function(){
 			user = $(this).text().slice(1);
-			$('.tweet-subheader').append('Tweets by @' + user);
+			$('.tweet-subheader').empty();
+			$('.tweet-subheader').append('<h4>Tweets by @' + user + '<h4>');
 			if ( $('.onclick-show-all').length === 0){
 				$('.tweet-nav').prepend($showAllButton);
 			}
@@ -62,6 +64,26 @@ $(document).ready(function(){
 			autorefreshTweets();
 		},refreshRate);
 	}
+
+	/* Add tweet using AJAX */
+	var submitTweet = function(){
+	  var tweet = {};
+	  tweet.user = $('#name').val();
+	  tweet.message = $('#message').val();
+	  tweet.created_at = new Date();
+	  addTweet(tweet);
+		refreshTweets();		
+	}
+	
+	// button pressed
+	$('.onclick-submit').click(submitTweet);
+
+	// enter pressed
+	$('#message').keypress(function(e) {
+	  if(e.which == 13) {
+			submitTweet();
+	  }
+	});
 
 	/* Kickstart program */
 	autorefreshTweets();

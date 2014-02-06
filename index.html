@@ -10,15 +10,16 @@
   <body>
 		<div class="tweet-window">
 			<div class="tweet-header">
-				<h3><i class="fa fa-stack-exchange fa-2x valign"></i> Hack Reactor Twittler</h3>
+				<h2><i class="fa fa-stack-exchange fa-2x valign"></i> Hack Reactor Twittler</h2>
 				<h5 class="tweet-subheader"></h5>
+				<span class="tweet-nav"></span>
 			</div>
-			<div class="tweet-nav">
-				<span class="onclick-tweet"><i class="fa fa-comment-o"></i> Tweet</span>
-			</div>
-			<div class="tweet-form">
-				<input class="form-control" type="text"></input>
-				<input class="btn" type="button"></input>
+			<div class="tweet-form-wrap">
+				<form class="tweet-form form-inline">
+					<input id="name" class="form-control" placeholder="Your name.." type="text"></input>
+					<input id="message" class="form-control" placeholder="Compose new tweet.." type="text"></input>
+					<button type="button" class="btn btn-primary onclick-submit" ><i class="fa fa-twitter"></i></button>
+				</form>
 			</div>
 			<div class="tweet-content">
 				<!-- Tweets go here -->

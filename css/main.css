@@ -52,23 +52,28 @@ body {
 
 /* Navigation */
 
-.tweet-nav {
+.onclick-show-all {
+	cursor: pointer;
 	font-family: "Vollkorn", sans-serif;
+}
+
+/* Tweet form */
+
+.tweet-form-wrap {
 	background: rgb(230,230,235);
 	padding-top: 10px;
 	padding-bottom: 7px;
 	padding-right: 10px;
-	text-align: right;
+	text-align: center;
 	border-bottom: 1px solid #e1e8ed;	
 }
 
-.onclick-show-all {
-	cursor: pointer;
+.tweet-form #name {
+	width: 180px;
 }
 
-.onclick-tweet {
-	padding-left: 5px;
-	cursor: pointer;	
+.tweet-form #message {
+	width: 300px;
 }
 
 /* Tweet */
